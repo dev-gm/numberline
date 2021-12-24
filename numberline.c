@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-unsigned _log10(unsigned x) {
-	unsigned out = 0;
+#define unsigned int uint
+
+uint _log10(uint x) {
+	uint out = 0;
 	while (x >= 10) {
 		x /= 10;
 		++out;
@@ -11,7 +13,7 @@ unsigned _log10(unsigned x) {
 }
 
 // nums must be sorted
-void display_numberline(unsigned *nums, size_t len) {
+void display_numberline(uint *nums, size_t len) {
 	size_t i, j;
 	putchar('|'); // 0
 	for (j = 0; j < nums[0]; ++j)
@@ -33,4 +35,9 @@ void display_numberline(unsigned *nums, size_t len) {
 	putchar('\n');
 }
 
-int main() {}
+int main(int argc, char *argv[]) {
+	uint *nums = malloc((argc-1) * sizeof(uint));
+	for (int i = 1; i < argc; ++i)
+		nums[i-1] = (uint) atoi(argv[i]);
+	display_numberline(nums, (size_t) argc-1);
+}
